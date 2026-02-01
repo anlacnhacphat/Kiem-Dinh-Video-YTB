@@ -73,3 +73,29 @@ export async function performMonetizationAudit(input: string): Promise<AuditRepo
     groundingSources: sources
   };
 }
+
+export async function generateSuggestedComment(videoInput: string): Promise<string> {
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  
+  const response = await ai.models.generateContent({
+    model: 'gemini-3-flash-preview',
+    contents: `Sử dụng Google Search để tìm hiểu tiêu đề, nội dung cụ thể và tên kênh của video này: "${videoInput}".
+    
+    Sau đó, hãy viết một bình luận YouTube dài tầm 100 chữ bằng tiếng Việt.
+    
+    YÊU CẦU QUAN TRỌNG:
+    1. KHÔNG VIẾT CHUNG CHUNG: Bình luận phải nhắc đến chủ đề thực tế của video (Ví dụ: Nếu video về nấu ăn thì khen món ăn/cách chế biến, nếu về công nghệ thì khen kiến thức/thiết bị).
+    2. KHEN CHỦ KÊNH: Khen ngợi sự tâm huyết, cách biên tập hoặc kiến thức sâu rộng mà chủ kênh đã chia sẻ. Phải cho thấy bạn đã xem kỹ video.
+    3. ĐỘ DÀI: Đảm bảo độ dài khoảng 100 chữ để tạo sự tin tưởng và "có tâm".
+    4. ICON: Sử dụng các icon nổi bật (ví dụ: 🔥, 🚀, 💎, ✨, 💯, 👏) để bình luận bắt mắt nhưng vẫn tinh tế.
+    5. VĂN PHONG: Tự nhiên, nhiệt huyết, đúng chất fan cứng ủng hộ kênh lâu năm.
+    6. KẾT LUẬN: Chúc kênh ngày càng phát triển và kêu gọi mọi người cùng chia sẻ video này.
+
+    Chỉ trả về đoạn văn bản bình luận hoàn chỉnh.`,
+    config: {
+      tools: [{ googleSearch: {} }]
+    }
+  });
+
+  return response.text || "";
+}

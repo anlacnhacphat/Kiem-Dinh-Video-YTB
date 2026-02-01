@@ -22,7 +22,8 @@ export interface AuditReport {
   checklist: AuditCheck[];
   expertRecommendations: string[];
   groundingSources?: { title: string; uri: string }[];
-  thumbnailUrl?: string; // Add thumbnail URL field
+  thumbnailUrl?: string;
+  videoUrl?: string; // Lưu trữ link gốc để hiển thị Preview đồng nhất
 }
 
 export interface AppState {
