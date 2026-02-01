@@ -1,0 +1,8 @@
+{
+  "name": "Kiểm Định Video Kiếm Tiền",
+  "description": "Nền tảng kiểm định chính sách kiếm tiền YouTube chuyên nghiệp, phân tích lỗi nội dung lặp lại và chất lượng sáng tạo.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
